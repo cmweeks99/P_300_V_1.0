@@ -1,0 +1,63 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      radiationProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+radiation        on;
+radiationModel   laserDTRM;
+//laserDTRMCoeffs
+mode	             Gaussian;
+nTheta    	             100;
+nr    	             50;
+focalLaserPosition table
+(
+    (0 (0.0001 0.00022918637 0.0003801888921))
+   (0.0013 (0.0014 0.00022918637 0.0003801888921))
+);
+laserDirection           constant  (0 -0.342020143 -0.939692621) ;
+focalLaserRadius         0.000050;
+laserPower   346.9551;
+sigma	    0.000025;
+qualityBeamLaser	 1.0;
+// minimum metal phase fraction in a cell required for laser to absorb
+thresholdPercent	0.50;
+// Number of flow iterations per radiation iteration
+solverFreq 1;
+//absorptionEmissionModel none;
+absorptionEmissionModel localDensityAbsorptionEmission;
+localDensityAbsorptionEmissionCoeffs
+{
+ alphaNames (alpha.gas alpha.liquid alpha.solid);
+ aCoeff  (0 4.7133e7 4.7133e7);
+ eCoeff  (0 0 0); //(0 0 0)
+ ECoeff  (0 0 0);
+}
+scatterModel         none;
+sootModel            none;
+transmissivityModel  none;
+reflectionModel
+(
+(gas and solid)
+{
+    type            FresnelLaser;
+         epsilon    0.20;
+}
+(gas and liquid)
+{
+    type            FresnelLaser;
+         epsilon    0.20;
+}
+);
+alphaCut	0.50;  //Used for reflection model
+// ************************************************************************* //

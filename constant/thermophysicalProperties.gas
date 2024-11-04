@@ -1,0 +1,84 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  dev.develop                           |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      thermophysicalProperties.gas;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+thermoType
+{
+    type            heRhoThermo;
+    mixture         multiComponentMixture;
+    transport       const;
+    thermo          hConst;
+    equationOfState incompressiblePerfectGas;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+// ************************************************************************* //
+
+species
+(
+	argon
+	vapour
+);
+
+inertSpecie argon;
+
+argon
+{
+    specie
+    {
+	nMoles		1;
+        molWeight       39.95;
+    }
+    equationOfState
+    {
+	pRef	101325;
+    }
+    thermodynamics
+    {
+		Cp	523;	// J/kgK
+		Hf	0;     
+    }
+    transport
+    {
+        mu	2.1e-05;		// N s/m^2
+        Pr	0.639;					
+    }
+}
+
+vapour
+{
+    specie
+    {
+        molWeight       55.35;
+    }
+    equationOfState
+    {
+	pRef	101325;
+    }
+    thermodynamics
+    {
+		Cp	372;	// J/kgK
+		Hf	7.45e6; 
+    }
+    transport
+    {
+        mu	1.8e-05;		// N s/m^2
+			Pr	0.7;
+    }
+}
+
+

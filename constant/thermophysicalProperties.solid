@@ -1,0 +1,109 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  dev.develop                           |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      thermophysicalProperties.solid;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+thermoType
+{
+    type            heSolidThermo;
+    mixture         pureMixture;
+    transport       tabulated;
+    thermo          hTabulated;
+    equationOfState icoTabulated;
+    specie          specie;
+    energy          sensibleEnthalpy;
+}
+
+// ************************************************************************* //
+
+
+mixture
+{
+    specie
+    {
+        nMoles          1;
+        molWeight       55.35;
+    }
+    equationOfState
+    {
+        rho
+        (
+	(300	7954)
+	(400	7910)
+	(500	7864)
+	(600	7818)
+	(700	7771)
+	(800	7723)
+	(900	7674)
+	(1000	7624)
+	(1100	7574)
+	(1200	7523)
+	(1300	7471)
+	(1400	7419)
+	(1500	7365)
+	(1600	7311)
+	(1700	7256)
+	(999999	7256)
+        );
+
+    }
+    thermodynamics
+    {
+        Cp
+        (
+	(300	499)	
+	(400	512)
+	(500	526)
+	(600	538)
+	(700	552)
+	(800	565)
+	(900	579)
+	(1000	592)
+	(1100	605)
+	(1200	618)
+	(1300	632)
+	(1400	645)
+	(1500	658)
+	(1600	672)
+	(1700	685)
+	(999999	685)	
+        );
+        Hf	0; 		//heat of fusion J/kg
+        Sf	0;
+    }
+    transport
+    {
+
+        kappa
+        (
+	(300	14.0)
+	(400	15.5)
+	(500	17.1)
+	(600	18.7)
+	(700	20.3)
+	(800	21.8)
+	(900	23.4)
+	(1000	25.0)
+	(1100	26.5)
+	(1200	28.1)
+	(1300	29.7)
+	(1400	31.3)
+	(1500	32.8)
+	(1600	34.4)
+	(1700	36.0)
+	(999999	36.0)
+        );
+    }
+}
